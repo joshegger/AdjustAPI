@@ -5,8 +5,8 @@ from django.db.models import Sum
 
 def group_by_filter(self, queryset, name, value):
     params = [val.strip() for val in value.split(',')]
-    return queryset.values(*params).annotate(clicks=Sum('clicks'), imperessions=Sum('impressions'),
-                                             installs=Sum('installs'), revenue=Sum('revenue'), spend=Sum('spend'))
+    return queryset.values(*params).annotate(clicks=Sum('clicks'), installs=Sum('installs'), impressions=Sum('impressions'),
+                                              revenue=Sum('revenue'), spend=Sum('spend'))
 
     sort_by_date = CharFilter(method='sort_by_date_filter')
     sort_by_channel = CharFilter(method='sort_by_channel_filter')
@@ -14,7 +14,7 @@ def group_by_filter(self, queryset, name, value):
     sort_by_spend = CharFilter(method='sort_by_spend_filter')
     sort_by_revenue = CharFilter(method='sort_by_revenue_filter')
     sort_by_os = CharFilter(method='sort_by_os_filter')
-    sort_by_impressions = CharFilter(method='sort_by_imperessions_filter')
+    sort_by_impressions = CharFilter(method='sort_by_impressions_filter')
     sort_by_clicks = CharFilter(method='sort_by_clicks_filter')
     sort_by_installs = CharFilter(method='sort_by_installs_filter')
     
@@ -65,7 +65,7 @@ class Filter_by_User(FilterSet):
         
     def sort_by_impressions_filter(self,queryset,name,value):
         if value == 'desc':
-            return queryset.order_by('-imperessions')
+            return queryset.order_by('-impressions')
         else:
             return queryset.order_by('impressions')
 
